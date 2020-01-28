@@ -295,7 +295,7 @@ export default class Toolbar extends React.Component {
         <h4>Toolbox</h4>
         <ul>
           {
-            this.state.items.map((item) => (<ToolbarItem data={item} key={item.key} onClick={this._onClick.bind(this, item)} onCreate={this.create} />))
+            this.state.items.map((item, i) => (<ToolbarItem data={item} key={i} onClick={this._onClick.bind(this, item)} onCreate={this.create} />))
           }
         </ul>
       </div>
