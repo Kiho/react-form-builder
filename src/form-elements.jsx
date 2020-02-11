@@ -1,6 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
+
 import React from 'react';
-import Select from 'react-select';
+// import Select from 'react-select';
+import { Select } from 'antd';
 import xss from 'xss';
 import { format, parse } from 'date-fns';
 // import moment from 'moment';
@@ -9,6 +11,8 @@ import ReactBootstrapSlider from 'react-bootstrap-slider';
 import ReactDatePicker from 'react-datepicker';
 import StarRating from './star-rating';
 import HeaderBar from './header-bar';
+
+import 'antd/dist/antd.css';
 
 const FormElements = {};
 const myxss = new xss.FilterXSS({
@@ -389,17 +393,20 @@ class Dropdown extends React.Component {
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
+    if(this.props.data.multiple){
+      props.mode = "multiple";
+    }
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <select {...props}>
+          <Select {...props}>
             {this.props.data.options.map((option) => {
               const this_key = `preview_${option.key}`;
               return <option value={option.value} key={this_key}>{option.text}</option>;
             })}
-          </select>
+          </Select>
         </div>
       </div>
     );

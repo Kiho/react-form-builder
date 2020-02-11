@@ -104,6 +104,8 @@ export default class FormElementsEdit extends React.Component {
     }
 
     const this_checked = this.props.element.hasOwnProperty('required') ? this.props.element.required : false;
+    const this_multiline = this.props.element.hasOwnProperty('multiple') ? this.props.element.multiple : false;
+    
     const this_read_only = this.props.element.hasOwnProperty('readOnly') ? this.props.element.readOnly : false;
     const this_default_today = this.props.element.hasOwnProperty('defaultToday') ? this.props.element.defaultToday : false;
     const this_show_time_select = this.props.element.hasOwnProperty('showTimeSelect') ? this.props.element.showTimeSelect : false;
@@ -207,6 +209,13 @@ export default class FormElementsEdit extends React.Component {
                 Required
               </label>
             </div>
+            { this.props.element.hasOwnProperty('options') &&
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" checked={this_multiline} value={false} onChange={this.editElementProp.bind(this, 'multiple', 'checked')} />
+                Multiple
+              </label>
+            </div>}
             { this.props.element.hasOwnProperty('readOnly') &&
               <div className="checkbox">
                 <label>
