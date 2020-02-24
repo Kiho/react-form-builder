@@ -2,7 +2,7 @@
 
 import React from 'react';
 // import Select from 'react-select';
-import { Select } from 'antd';
+import { Select, Form } from 'antd';
 import xss from 'xss';
 import { format, parse } from 'date-fns';
 // import moment from 'moment';
@@ -39,7 +39,7 @@ const ComponentLabel = (props) => {
 
   return (
     <label className={props.className || ''}>
-      <span dangerouslySetInnerHTML={{ __html: myxss.process(props.data.label) }}/>
+      <span dangerouslySetInnerHTML={{ __html: myxss.process(props.data.label) }} />
       {hasRequiredLabel && <span className="label-required label label-danger">Required</span>}
     </label>
   );
@@ -51,11 +51,11 @@ const ComponentHeader = (props) => {
   }
   return (
     <div>
-    { props.data.pageBreakBefore &&
-      <div className="preview-page-break">Page Break</div>
-    }
-    <HeaderBar parent={props.parent} editModeOn={props.editModeOn} data={props.data} onDestroy={props._onDestroy} onEdit={props.onEdit} static={props.data.static} required={props.data.required} />
-  </div>
+      {props.data.pageBreakBefore &&
+        <div className="preview-page-break">Page Break</div>
+      }
+      <HeaderBar parent={props.parent} editModeOn={props.editModeOn} data={props.data} onDestroy={props._onDestroy} onEdit={props.onEdit} static={props.data.static} required={props.data.required} />
+    </div>
   );
 };
 
@@ -330,33 +330,33 @@ class DatePicker extends React.Component {
         <div className="form-group">
           <ComponentLabel {...this.props} />
           <div>
-            { readOnly &&
+            {readOnly &&
               <input type="text"
-                     name={props.name}
-                     ref={props.ref}
-                     readOnly={readOnly}
-                     placeholder={this.state.placeholder}
-                     value={this.state.value}
-                     className="form-control" />
+                name={props.name}
+                ref={props.ref}
+                readOnly={readOnly}
+                placeholder={this.state.placeholder}
+                value={this.state.value}
+                className="form-control" />
             }
-            { iOS && !readOnly &&
+            {iOS && !readOnly &&
               <input type="date"
-                     name={props.name}
-                     ref={props.ref}
-                     onChange={this.handleChange}
-                     dateFormat="MM/DD/YYYY"
-                     placeholder={this.state.placeholder}
-                     value={this.state.value}
-                     className = "form-control" />
+                name={props.name}
+                ref={props.ref}
+                onChange={this.handleChange}
+                dateFormat="MM/DD/YYYY"
+                placeholder={this.state.placeholder}
+                value={this.state.value}
+                className="form-control" />
             }
-            { !iOS && !readOnly &&
+            {!iOS && !readOnly &&
               <ReactDatePicker
                 name={props.name}
                 ref={props.ref}
                 onChange={this.handleChange}
                 selected={this.state.internalValue}
                 todayButton={'Today'}
-                className = "form-control"
+                className="form-control"
                 isClearable={true}
                 showTimeSelect={showTimeSelect}
                 showTimeSelectOnly={showTimeSelectOnly}
@@ -371,43 +371,39 @@ class DatePicker extends React.Component {
 }
 
 class Dropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.inputField = React.createRef();
-  }
 
   render() {
     const props = {};
-    props.className = 'form-control';
-    props.name = this.props.data.field_name;
+    const { getFieldDecorator } = this.props.form;
+    let baseClasses = 'SortableItem rfb-item';
 
+    props.name = this.props.data.field_name;
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
-      props.ref = this.inputField;
     }
 
     if (this.props.read_only) {
       props.disabled = 'disabled';
     }
 
-    let baseClasses = 'SortableItem rfb-item';
-    if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
-
-    if(this.props.data.multiple){
+    if (this.props.data.multiple) {
       props.mode = "multiple";
     }
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <div className="form-group">
-          <ComponentLabel {...this.props} />
-          <Select {...props}>
-            {this.props.data.options.map((option) => {
-              const this_key = `preview_${option.key}`;
-              return <option value={option.value} key={this_key}>{option.text}</option>;
-            })}
-          </Select>
-        </div>
+        <Form.Item label={this.props.data.label}>
+          {getFieldDecorator('username', {
+            rules: [{ required: this.props.data.required, message: 'This field is required!' }],
+          })(
+            <Select {...props} style={{ minWidth: 200 }}>
+              {this.props.data.options.map((option) => {
+                const this_key = `preview_${option.key}`;
+                return <Select.Option value={option.value} key={this_key}>{option.text}</Select.Option>;
+              })}
+            </Select>,
+          )}
+        </Form.Item>
       </div>
     );
   }
@@ -467,8 +463,8 @@ class Signature extends React.Component {
             ? (<img src={sourceDataURL} />)
             : (<SignaturePad {...pad_props} />)
           }
-          { canClear && (
-            <i className="fa fa-times clear-signature" onClick={this.clear} title="Clear Signature"></i>) }
+          {canClear && (
+            <i className="fa fa-times clear-signature" onClick={this.clear} title="Clear Signature"></i>)}
           <input {...props} />
         </div>
       </div>
@@ -572,7 +568,7 @@ class Checkboxes extends React.Component {
                   if (c && self.props.mutable) {
                     self.options[`child_ref_${option.key}`] = c;
                   }
-                } } {...props} /> {option.text}
+                }} {...props} /> {option.text}
               </label>
             );
           })}
@@ -622,7 +618,7 @@ class RadioButtons extends React.Component {
                   if (c && self.props.mutable) {
                     self.options[`child_ref_${option.key}`] = c;
                   }
-                } } {...props} /> {option.text}
+                }} {...props} /> {option.text}
               </label>
             );
           })}
@@ -641,13 +637,13 @@ class Image extends React.Component {
 
     return (
       <div className={baseClasses} style={style}>
-        { !this.props.mutable &&
+        {!this.props.mutable &&
           <HeaderBar parent={this.props.parent} editModeOn={this.props.editModeOn} data={this.props.data} onDestroy={this.props._onDestroy} onEdit={this.props.onEdit} required={this.props.data.required} />
         }
-        { this.props.data.src &&
+        {this.props.data.src &&
           <img src={this.props.data.src} width={this.props.data.width} height={this.props.data.height} />
         }
-        { !this.props.data.src &&
+        {!this.props.data.src &&
           <div className="no-image">No Image</div>
         }
       </div>
@@ -775,24 +771,24 @@ class Camera extends React.Component {
             ? (<div><img src={sourceDataURL} /></div>)
             : (<div className="image-upload-container">
 
-            <div style={fileInputStyle}>
-              <input name={name} type="file" accept="image/*" capture="camera" className="image-upload" onChange={this.displayImage} />
-              <div className="image-upload-control">
-                <div className="btn btn-default btn-school"><i className="fa fa-camera"></i> Upload Photo</div>
-                <p>Select an image from your computer or device.</p>
-              </div>
-            </div>
-
-            { this.state.img &&
-              <div>
-                <img src={ this.state.img } height="100" className="image-upload-preview" /><br />
-                <div className="btn btn-school btn-image-clear" onClick={this.clearImage}>
-                  <i className="fa fa-times"></i> Clear Photo
+              <div style={fileInputStyle}>
+                <input name={name} type="file" accept="image/*" capture="camera" className="image-upload" onChange={this.displayImage} />
+                <div className="image-upload-control">
+                  <div className="btn btn-default btn-school"><i className="fa fa-camera"></i> Upload Photo</div>
+                  <p>Select an image from your computer or device.</p>
                 </div>
               </div>
-            }
-          </div>)
-        }
+
+              {this.state.img &&
+                <div>
+                  <img src={this.state.img} height="100" className="image-upload-preview" /><br />
+                  <div className="btn btn-school btn-image-clear" onClick={this.clearImage}>
+                    <i className="fa fa-times"></i> Clear Photo
+                </div>
+                </div>
+              }
+            </div>)
+          }
         </div>
       </div>
     );

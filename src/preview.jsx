@@ -5,12 +5,13 @@
 import React from 'react';
 import update from 'immutability-helper';
 import store from './stores/store';
+import { Form} from 'antd';
 import FormElementsEdit from './form-elements-edit';
 import SortableFormElements from './sortable-form-elements';
 
 const { PlaceHolder } = SortableFormElements;
 
-export default class Preview extends React.Component {
+class Preview extends React.Component {
   constructor(props) {
     super(props);
 
@@ -130,16 +131,16 @@ export default class Preview extends React.Component {
     store.dispatch('updateOrder', newData.data);
   }
 
-  getElement(item, index) {
+  getElement(item, index, form) {
     const SortableFormElement = SortableFormElements[item.element];
-    return <SortableFormElement id={item.id} seq={this.seq} index={index} moveCard={this.moveCard} insertCard={this.insertCard} mutable={false} parent={this.props.parent} editModeOn={this.props.editModeOn} isDraggable={true} key={item.id} sortData={item.id} data={item} _onDestroy={this._onDestroy} />;
+    return <SortableFormElement form={form} id={item.id} seq={this.seq} index={index} moveCard={this.moveCard} insertCard={this.insertCard} mutable={false} parent={this.props.parent} editModeOn={this.props.editModeOn} isDraggable={true} key={item.id} sortData={item.id} data={item} _onDestroy={this._onDestroy} />;
   }
 
   render() {
     let classes = this.props.className;
     if (this.props.editMode) { classes += ' is-editing'; }
     const data = this.state.data.filter(x => !!x);
-    const items = data.map((item, index) => this.getElement(item, index));
+    const items = data.map((item, index) => this.getElement(item, index, this.props.form));
     return (
       <div className={classes}>
         <div className="edit-form" ref={this.editForm}>
@@ -156,3 +157,6 @@ export default class Preview extends React.Component {
 Preview.defaultProps = {
   showCorrectColumn: false, files: [], editMode: false, editElement: null, className: 'react-form-builder-preview pull-left',
 };
+
+
+export default Form.create()(Preview);

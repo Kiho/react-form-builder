@@ -140,6 +140,10 @@ export default class FormElementsEdit extends React.Component {
           <h4 className="pull-left">{this.props.element.text}</h4>
           <i className="pull-right fa fa-times dismiss-edit" onClick={this.props.manualEditModeOff}></i>
         </div>
+        <div className="form-group">
+          <label className="control-label">Field Name:</label>
+          <input defaultValue={this.props.element.file_path} onBlur={this.updateElement.bind(this)} onChange={this.editElementProp.bind(this, 'name', 'value')}/>
+        </div>
         { this.props.element.hasOwnProperty('content') &&
           <div className="form-group">
             <label className="control-label">Text to display:</label>
@@ -269,8 +273,8 @@ export default class FormElementsEdit extends React.Component {
           )
           : (<div/>)
         }
-
-        {canHavePageBreakBefore &&
+        {/* Rmoved as i don't think it is needed */}
+        {/* {canHavePageBreakBefore &&
           <div className="form-group">
             <label className="control-label">Print Options</label>
             <div className="checkbox">
@@ -280,9 +284,9 @@ export default class FormElementsEdit extends React.Component {
               </label>
             </div>
           </div>
-        }
-
-        {canHaveAlternateForm &&
+        } */}
+      {/* TODO removed for now */}
+        {/* {canHaveAlternateForm &&
           <div className="form-group">
             <label className="control-label">Alternate/Signature Page</label>
             <div className="checkbox">
@@ -292,7 +296,7 @@ export default class FormElementsEdit extends React.Component {
               </label>
             </div>
           </div>
-        }
+        } */}
 
         { this.props.element.hasOwnProperty('step') &&
           <div className="form-group">
