@@ -249,6 +249,7 @@ export default class ReactForm extends React.Component {
 
   render() {
     let data_items = this.props.data;
+    console.log(data_items);
 
     if (this.props.display_short) {
       data_items = this.props.data.filter((i) => i.alternateForm === true);
