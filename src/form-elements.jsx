@@ -112,7 +112,7 @@ class TextInput extends React.Component {
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
         <Form.Item label={this.props.data.label}>
-          {getFieldDecorator('username', {
+          {getFieldDecorator(this.props.data.field_name, {
             rules: [{ required: this.props.data.required, message: 'This field is required!' }],
           })(
             <Input {...props} style={{ minWidth: 200 }} />
@@ -227,10 +227,7 @@ class Dropdown extends React.Component {
     let baseClasses = 'SortableItem rfb-item';
 
     props.name = this.props.data.field_name;
-    if (this.props.mutable) {
-      props.defaultValue = this.props.defaultValue;
-    }
-
+    
     if (this.props.read_only) {
       props.disabled = 'disabled';
     }
@@ -242,7 +239,8 @@ class Dropdown extends React.Component {
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
         <Form.Item label={this.props.data.label}>
-          {getFieldDecorator('username', {
+          {getFieldDecorator(this.props.data.field_name, {
+            initialValue: this.props.defaultValue,
             rules: [{ required: this.props.data.required, message: 'This field is required!' }],
           })(
             <Select {...props} style={{ minWidth: 200 }}>
@@ -277,7 +275,7 @@ class Checkboxes extends React.Component {
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <Form.Item label={this.props.data.label}>
-            {getFieldDecorator('checkbox', {
+            {getFieldDecorator(this.props.data.field_name, {
               initialValue: self.props.defaultValue,
               rules: [{ required: this.props.data.required, message: 'This field is required!' }],
             })(
@@ -310,7 +308,7 @@ class RadioButtons extends React.Component {
       <ComponentHeader {...this.props} />
       <div className="form-group">
         <Form.Item label={this.props.data.label}>
-          {getFieldDecorator('radiobutton', {
+          {getFieldDecorator(this.props.data.field_name, {
             initialValue: self.props.defaultValue,
             rules: [{ required: this.props.data.required, message: 'This field is required!' }],
           })(

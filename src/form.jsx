@@ -9,11 +9,7 @@ import { EventEmitter } from 'fbemitter';
 import FormValidator from './form-validator';
 import FormElements from './form-elements';
 
-const {
-  Image, Checkboxes, Signature, Download, Camera,
-} = FormElements;
-
-export default class ReactForm extends React.Component {
+class ReactForm extends React.Component {
   form;
 
   inputs = {};
@@ -232,9 +228,10 @@ export default class ReactForm extends React.Component {
 
   getInputElement(item) {
     const Input = FormElements[item.element];
+    console.log(this.props.form);
     return (<Input
       handleChange={this.handleChange}
-      ref={c => this.inputs[item.field_name] = c}
+      form={this.props.form}
       mutable={true}
       key={`form_${item.id}`}
       data={item}
@@ -244,7 +241,7 @@ export default class ReactForm extends React.Component {
 
   getSimpleElement(item) {
     const Element = FormElements[item.element];
-    return (<Element mutable={true} key={`form_${item.id}`} data={item} />);
+    return (<Element form={this.props.form} mutable={true} key={`form_${item.id}`} data={item} />);
   }
 
   render() {
@@ -262,30 +259,7 @@ export default class ReactForm extends React.Component {
     });
 
     const items = data_items.map(item => {
-      switch (item.element) {
-        case 'TextInput':
-        case 'NumberInput':
-        case 'TextArea':
-        case 'Dropdown':
-        case 'DatePicker':
-        case 'RadioButtons':
-        case 'Rating':
-        case 'Tags':
-        case 'Range':
-          return this.getInputElement(item);
-        case 'Signature':
-          return <Signature ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only || item.readOnly} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._getDefaultValue(item)} />;
-        case 'Checkboxes':
-          return <Checkboxes ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only} handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._optionsDefaultValue(item)} />;
-        case 'Image':
-          return <Image ref={c => this.inputs[item.field_name] = c} handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._getDefaultValue(item)} />;
-        case 'Download':
-          return <Download download_path={this.props.download_path} mutable={true} key={`form_${item.id}`} data={item} />;
-        case 'Camera':
-          return <Camera ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only || item.readOnly} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._getDefaultValue(item)} />;
-        default:
-          return this.getSimpleElement(item);
-      }
+      return this.getSimpleElement(item);
     });
 
     const formTokenStyle = {
@@ -323,4 +297,5 @@ export default class ReactForm extends React.Component {
   }
 }
 
+export default Form.create()(ReactForm);
 ReactForm.defaultProps = { validateForCorrectness: false };

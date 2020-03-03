@@ -140,6 +140,7 @@ class Preview extends React.Component {
     let classes = this.props.className;
     if (this.props.editMode) { classes += ' is-editing'; }
     const data = this.state.data.filter(x => !!x);
+    console.log(this.props.form)
     const items = data.map((item, index) => this.getElement(item, index, this.props.form));
     return (
       <div className={classes}>
