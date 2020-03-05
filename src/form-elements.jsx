@@ -2,7 +2,7 @@
 
 import React from 'react';
 // import Select from 'react-select';
-import { Select, Form, Checkbox, Radio, Input, InputNumber, DatePicker} from 'antd';
+import { Select, Form, Checkbox, Radio, Input, InputNumber, DatePicker } from 'antd';
 import xss from 'xss';
 import HeaderBar from './header-bar';
 
@@ -97,7 +97,6 @@ class TextInput extends React.Component {
 
   render() {
     const props = {};
-    const { getFieldDecorator } = this.props.form;
     props.type = 'text';
     props.name = this.props.data.field_name;
 
@@ -111,12 +110,10 @@ class TextInput extends React.Component {
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <Form.Item label={this.props.data.label}>
-          {getFieldDecorator(this.props.data.field_name, {
-            rules: [{ required: this.props.data.required, message: 'This field is required!' }],
-          })(
-            <Input {...props} style={{ minWidth: 200 }} />
-          )}
+        <Form.Item label={this.props.data.label}
+          name={this.props.data.field_name}
+          rules={[{ required: this.props.data.required, message: 'This field is required!' }]}>
+          <Input {...props} style={{ minWidth: 200 }} />
         </Form.Item>
       </div>
     );
@@ -131,7 +128,6 @@ class NumberInput extends React.Component {
 
   render() {
     const props = {};
-    const { getFieldDecorator } = this.props.form;
 
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
@@ -148,12 +144,10 @@ class NumberInput extends React.Component {
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <Form.Item label={this.props.data.label}>
-          {getFieldDecorator(this.props.data.field_name, {
-            rules: [{ required: this.props.data.required, message: 'This field is required!' }],
-          })(
-            <InputNumber {...props} style={{ minWidth: 200 }} />
-          )}
+        <Form.Item label={this.props.data.label}
+          name={this.props.data.field_name}
+          rules={[{ required: this.props.data.required, message: 'This field is required!' }]}>
+          <InputNumber {...props} style={{ minWidth: 200 }} />
         </Form.Item>
       </div>
     );
@@ -167,7 +161,6 @@ class TextArea extends React.Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
     const props = {};
 
     if (this.props.read_only) {
@@ -180,12 +173,10 @@ class TextArea extends React.Component {
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <Form.Item label={this.props.data.label}>
-          {getFieldDecorator(this.props.data.field_name, {
-            rules: [{ required: this.props.data.required, message: 'This field is required!' }],
-          })(
+        <Form.Item label={this.props.data.label}
+          name={this.props.data.field_name}
+          rules={[{ required: this.props.data.required, message: 'This field is required!' }]}>
             <Input.TextArea {...props} style={{ minWidth: 200 }} />
-          )}
         </Form.Item>
       </div>
     );
@@ -194,7 +185,6 @@ class TextArea extends React.Component {
 
 class DatePickerComponent extends React.Component {
   render() {
-    const { getFieldDecorator } = this.props.form;
     const props = {};
 
     if (this.props.read_only) {
@@ -207,12 +197,10 @@ class DatePickerComponent extends React.Component {
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <Form.Item label={this.props.data.label}>
-          {getFieldDecorator(this.props.data.field_name, {
-            rules: [{ required: this.props.data.required, message: 'This field is required!' }],
-          })(
-            <DatePicker {...props} style={{ minWidth: 200 }} />
-          )}
+        <Form.Item label={this.props.data.label}
+          name={this.props.data.field_name}
+          rules={[{ required: this.props.data.required, message: 'This field is required!' }]}>
+          <DatePicker {...props} style={{ minWidth: 200 }} />
         </Form.Item>
       </div>
     );
@@ -223,11 +211,10 @@ class Dropdown extends React.Component {
 
   render() {
     const props = {};
-    const { getFieldDecorator } = this.props.form;
     let baseClasses = 'SortableItem rfb-item';
 
     props.name = this.props.data.field_name;
-    
+
     if (this.props.read_only) {
       props.disabled = 'disabled';
     }
@@ -238,18 +225,15 @@ class Dropdown extends React.Component {
     return (
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <Form.Item label={this.props.data.label}>
-          {getFieldDecorator(this.props.data.field_name, {
-            initialValue: this.props.defaultValue,
-            rules: [{ required: this.props.data.required, message: 'This field is required!' }],
-          })(
-            <Select {...props} style={{ minWidth: 200 }}>
-              {this.props.data.options.map((option) => {
-                const this_key = `preview_${option.key}`;
-                return <Select.Option value={option.value} key={this_key}>{option.text}</Select.Option>;
-              })}
-            </Select>,
-          )}
+        <Form.Item label={this.props.data.label}
+          name={this.props.data.field_name}
+          rules={[{ required: this.props.data.required, message: 'This field is required!' }]}>
+          <Select {...props} style={{ minWidth: 200 }}>
+            {this.props.data.options.map((option) => {
+              const this_key = `preview_${option.key}`;
+              return <Select.Option value={option.value} key={this_key}>{option.text}</Select.Option>;
+            })}
+          </Select>,
         </Form.Item>
       </div>
     );
@@ -264,7 +248,6 @@ class Checkboxes extends React.Component {
 
   render() {
     const self = this;
-    const { getFieldDecorator } = this.props.form;
     if (this.props.data.inline) { classNames += ' option-inline'; }
 
     let baseClasses = 'SortableItem rfb-item';
@@ -274,15 +257,12 @@ class Checkboxes extends React.Component {
       <div className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
-          <Form.Item label={this.props.data.label}>
-            {getFieldDecorator(this.props.data.field_name, {
-              initialValue: self.props.defaultValue,
-              rules: [{ required: this.props.data.required, message: 'This field is required!' }],
-            })(
-              <Checkbox.Group >
-                {this.props.data.options.map(item => <Checkbox key={item.value} value={item.key}> {item.value}  </Checkbox>)}
-              </Checkbox.Group>
-            )}
+          <Form.Item label={this.props.data.label}
+            name={this.props.data.field_name}
+            rules={[{ required: this.props.data.required, message: 'This field is required!' }]}>
+            <Checkbox.Group >
+              {this.props.data.options.map(item => <Checkbox key={item.value} value={item.key}> {item.value}  </Checkbox>)}
+            </Checkbox.Group>
           </Form.Item>
         </div>
       </div>
@@ -299,26 +279,22 @@ class RadioButtons extends React.Component {
   render() {
     const self = this;
     if (this.props.data.inline) { classNames += ' option-inline'; }
-    const { getFieldDecorator } = this.props.form;
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
     return (
       <div className={baseClasses}>
-      <ComponentHeader {...this.props} />
-      <div className="form-group">
-        <Form.Item label={this.props.data.label}>
-          {getFieldDecorator(this.props.data.field_name, {
-            initialValue: self.props.defaultValue,
-            rules: [{ required: this.props.data.required, message: 'This field is required!' }],
-          })(
+        <ComponentHeader {...this.props} />
+        <div className="form-group">
+          <Form.Item label={this.props.data.label}
+            name={this.props.data.field_name}
+            rules={[{ required: this.props.data.required, message: 'This field is required!' }]}>
             <Radio.Group>
-              {this.props.data.options.map(({value, key}) => <Radio key={value} value={key}> {value}  </Radio>)}
+              {this.props.data.options.map(({ value, key }) => <Radio key={value} value={key}> {value}  </Radio>)}
             </Radio.Group>
-          )}
-        </Form.Item>
+          </Form.Item>
+        </div>
       </div>
-    </div>
     );
   }
 }

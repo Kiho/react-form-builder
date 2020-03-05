@@ -273,7 +273,7 @@ class ReactForm extends React.Component {
       <div>
         <FormValidator emitter={this.emitter} />
         <div className='react-form-builder-form'>
-          <form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
+          <Form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
             { this.props.authenticity_token &&
               <div style={formTokenStyle}>
                 <input name='utf8' type='hidden' value='&#x2713;' />
@@ -290,12 +290,12 @@ class ReactForm extends React.Component {
                 <a href={this.props.back_action} className='btn btn-default btn-cancel btn-big'>{backName}</a>
               }
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     );
   }
 }
 
-export default Form.create()(ReactForm);
+export default ReactForm;
 ReactForm.defaultProps = { validateForCorrectness: false };

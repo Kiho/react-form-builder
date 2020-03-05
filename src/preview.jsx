@@ -143,7 +143,7 @@ class Preview extends React.Component {
     console.log(this.props.form)
     const items = data.map((item, index) => this.getElement(item, index, this.props.form));
     return (
-      <div className={classes}>
+      <Form className={classes}>
         <div className="edit-form" ref={this.editForm}>
           { this.props.editElement !== null &&
             <FormElementsEdit showCorrectColumn={this.props.showCorrectColumn} files={this.props.files} manualEditModeOff={this.manualEditModeOff} preview={this} element={this.props.editElement} updateElement={this.updateElement} />
@@ -151,7 +151,7 @@ class Preview extends React.Component {
         </div>
         <div className="Sortable">{items}</div>
          <PlaceHolder id="form-place-holder" show={items.length === 0} index={items.length} moveCard={this.cardPlaceHolder} insertCard={this.insertCard}/>
-      </div>
+      </Form>
     );
   }
 }
@@ -160,4 +160,4 @@ Preview.defaultProps = {
 };
 
 
-export default Form.create()(Preview);
+export default Preview;
