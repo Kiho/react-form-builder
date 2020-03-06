@@ -4,15 +4,12 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Form} from 'antd';
 import { EventEmitter } from 'fbemitter';
 import FormValidator from './form-validator';
 import FormElements from './form-elements';
 
-const {
-  Image, Checkboxes, Signature, Download, Camera,
-} = FormElements;
-
-export default class ReactForm extends React.Component {
+class ReactForm extends React.Component {
   form;
 
   inputs = {};
@@ -231,9 +228,10 @@ export default class ReactForm extends React.Component {
 
   getInputElement(item) {
     const Input = FormElements[item.element];
+    console.log(this.props.form);
     return (<Input
       handleChange={this.handleChange}
-      ref={c => this.inputs[item.field_name] = c}
+      form={this.props.form}
       mutable={true}
       key={`form_${item.id}`}
       data={item}
@@ -243,11 +241,12 @@ export default class ReactForm extends React.Component {
 
   getSimpleElement(item) {
     const Element = FormElements[item.element];
-    return (<Element mutable={true} key={`form_${item.id}`} data={item} />);
+    return (<Element form={this.props.form} mutable={true} key={`form_${item.id}`} data={item} />);
   }
 
   render() {
     let data_items = this.props.data;
+    console.log(data_items);
 
     if (this.props.display_short) {
       data_items = this.props.data.filter((i) => i.alternateForm === true);
@@ -260,30 +259,7 @@ export default class ReactForm extends React.Component {
     });
 
     const items = data_items.map(item => {
-      switch (item.element) {
-        case 'TextInput':
-        case 'NumberInput':
-        case 'TextArea':
-        case 'Dropdown':
-        case 'DatePicker':
-        case 'RadioButtons':
-        case 'Rating':
-        case 'Tags':
-        case 'Range':
-          return this.getInputElement(item);
-        case 'Signature':
-          return <Signature ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only || item.readOnly} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._getDefaultValue(item)} />;
-        case 'Checkboxes':
-          return <Checkboxes ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only} handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._optionsDefaultValue(item)} />;
-        case 'Image':
-          return <Image ref={c => this.inputs[item.field_name] = c} handleChange={this.handleChange} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._getDefaultValue(item)} />;
-        case 'Download':
-          return <Download download_path={this.props.download_path} mutable={true} key={`form_${item.id}`} data={item} />;
-        case 'Camera':
-          return <Camera ref={c => this.inputs[item.field_name] = c} read_only={this.props.read_only || item.readOnly} mutable={true} key={`form_${item.id}`} data={item} defaultValue={this._getDefaultValue(item)} />;
-        default:
-          return this.getSimpleElement(item);
-      }
+      return this.getSimpleElement(item);
     });
 
     const formTokenStyle = {
@@ -297,7 +273,7 @@ export default class ReactForm extends React.Component {
       <div>
         <FormValidator emitter={this.emitter} />
         <div className='react-form-builder-form'>
-          <form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
+          <Form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
             { this.props.authenticity_token &&
               <div style={formTokenStyle}>
                 <input name='utf8' type='hidden' value='&#x2713;' />
@@ -314,11 +290,12 @@ export default class ReactForm extends React.Component {
                 <a href={this.props.back_action} className='btn btn-default btn-cancel btn-big'>{backName}</a>
               }
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     );
   }
 }
 
+export default ReactForm;
 ReactForm.defaultProps = { validateForCorrectness: false };

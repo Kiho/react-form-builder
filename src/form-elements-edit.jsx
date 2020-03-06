@@ -104,6 +104,8 @@ export default class FormElementsEdit extends React.Component {
     }
 
     const this_checked = this.props.element.hasOwnProperty('required') ? this.props.element.required : false;
+    const this_multiline = this.props.element.hasOwnProperty('multiple') ? this.props.element.multiple : false;
+    
     const this_read_only = this.props.element.hasOwnProperty('readOnly') ? this.props.element.readOnly : false;
     const this_default_today = this.props.element.hasOwnProperty('defaultToday') ? this.props.element.defaultToday : false;
     const this_show_time_select = this.props.element.hasOwnProperty('showTimeSelect') ? this.props.element.showTimeSelect : false;
@@ -137,6 +139,10 @@ export default class FormElementsEdit extends React.Component {
         <div className="clearfix">
           <h4 className="pull-left">{this.props.element.text}</h4>
           <i className="pull-right fa fa-times dismiss-edit" onClick={this.props.manualEditModeOff}></i>
+        </div>
+        <div className="form-group">
+          <label className="control-label">Field Name:</label>
+          <input defaultValue={this.props.element.file_path} onBlur={this.updateElement.bind(this)} onChange={this.editElementProp.bind(this, 'name', 'value')}/>
         </div>
         { this.props.element.hasOwnProperty('content') &&
           <div className="form-group">
@@ -209,6 +215,13 @@ export default class FormElementsEdit extends React.Component {
                 Required
               </label>
             </div>
+            { this.props.element.hasOwnProperty('options') &&
+            <div className="checkbox">
+              <label>
+                <input type="checkbox" checked={this_multiline} value={false} onChange={this.editElementProp.bind(this, 'multiple', 'checked')} />
+                Multiple
+              </label>
+            </div>}
             { this.props.element.hasOwnProperty('readOnly') &&
               <div className="checkbox">
                 <label>
@@ -262,8 +275,8 @@ export default class FormElementsEdit extends React.Component {
           )
           : (<div/>)
         }
-
-        {canHavePageBreakBefore &&
+        {/* Rmoved as i don't think it is needed */}
+        {/* {canHavePageBreakBefore &&
           <div className="form-group">
             <label className="control-label">Print Options</label>
             <div className="checkbox">
@@ -273,9 +286,9 @@ export default class FormElementsEdit extends React.Component {
               </label>
             </div>
           </div>
-        }
-
-        {canHaveAlternateForm &&
+        } */}
+      {/* TODO removed for now */}
+        {/* {canHaveAlternateForm &&
           <div className="form-group">
             <label className="control-label">Alternate/Signature Page</label>
             <div className="checkbox">
@@ -285,7 +298,7 @@ export default class FormElementsEdit extends React.Component {
               </label>
             </div>
           </div>
-        }
+        } */}
 
         { this.props.element.hasOwnProperty('step') &&
           <div className="form-group">

@@ -5,12 +5,13 @@
 import React from 'react';
 import update from 'immutability-helper';
 import store from './stores/store';
+import { Form} from 'antd';
 import FormElementsEdit from './form-elements-edit';
 import SortableFormElements from './sortable-form-elements';
 
 const { PlaceHolder } = SortableFormElements;
 
-export default class Preview extends React.Component {
+class Preview extends React.Component {
   constructor(props) {
     super(props);
 
@@ -130,18 +131,19 @@ export default class Preview extends React.Component {
     store.dispatch('updateOrder', newData.data);
   }
 
-  getElement(item, index) {
+  getElement(item, index, form) {
     const SortableFormElement = SortableFormElements[item.element];
-    return <SortableFormElement id={item.id} seq={this.seq} index={index} moveCard={this.moveCard} insertCard={this.insertCard} mutable={false} parent={this.props.parent} editModeOn={this.props.editModeOn} isDraggable={true} key={item.id} sortData={item.id} data={item} _onDestroy={this._onDestroy} />;
+    return <SortableFormElement form={form} id={item.id} seq={this.seq} index={index} moveCard={this.moveCard} insertCard={this.insertCard} mutable={false} parent={this.props.parent} editModeOn={this.props.editModeOn} isDraggable={true} key={item.id} sortData={item.id} data={item} _onDestroy={this._onDestroy} />;
   }
 
   render() {
     let classes = this.props.className;
     if (this.props.editMode) { classes += ' is-editing'; }
     const data = this.state.data.filter(x => !!x);
-    const items = data.map((item, index) => this.getElement(item, index));
+    console.log(this.props.form)
+    const items = data.map((item, index) => this.getElement(item, index, this.props.form));
     return (
-      <div className={classes}>
+      <Form className={classes}>
         <div className="edit-form" ref={this.editForm}>
           { this.props.editElement !== null &&
             <FormElementsEdit showCorrectColumn={this.props.showCorrectColumn} files={this.props.files} manualEditModeOff={this.manualEditModeOff} preview={this} element={this.props.editElement} updateElement={this.updateElement} />
@@ -149,10 +151,13 @@ export default class Preview extends React.Component {
         </div>
         <div className="Sortable">{items}</div>
          <PlaceHolder id="form-place-holder" show={items.length === 0} index={items.length} moveCard={this.cardPlaceHolder} insertCard={this.insertCard}/>
-      </div>
+      </Form>
     );
   }
 }
 Preview.defaultProps = {
   showCorrectColumn: false, files: [], editMode: false, editElement: null, className: 'react-form-builder-preview pull-left',
 };
+
+
+export default Preview;
