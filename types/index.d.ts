@@ -2,7 +2,28 @@ import * as React from 'react';
 
 type BaseElement = {
   id: string;
-  element: "Header Text" | "Label" | "Paragraph" | "Line Break" | "Dropdown" | "Tags" | "Checkboxes" | "Multiple Choice" | "Text Input" | "Number Input" | "Multi-line Input" | "Two Column Row" | "Three Column Row" | "Four Column Row" | "Image" | "Rating" | "Date" | "Signature" | "Web site" | "File Attachment" | "Range" | "Camera";
+  element: "Header Text" |
+    "Label" |
+    "Paragraph" |
+    "Line Break" |
+    "Dropdown" |
+    "Tags" |
+    "Checkboxes" |
+    "Multiple Choice" |
+    "Text Input" |
+    "Number Input" |
+    "Multi-line Input" |
+    "Two Column Row" |
+    "Three Column Row" |
+    "Four Column Row" |
+    "Image" |
+    "Rating" |
+    "Date" |
+    "Signature" |
+    "Web site" |
+    "File Attachment" |
+    "Range" |
+    "Camera";
   showDescription?: boolean;
   required: boolean;
   canHaveAlternateForm: boolean;
@@ -76,11 +97,43 @@ export type FormBuilderPostData = {
   task_data: TaskData[];
 }
 
+export type ToolbarItem = {
+  key: string;
+  name: string;
+  static: boolean;
+  icon: string;
+  content: string;
+}
+
 export interface FormBuilderProps {
-  toolbarItems?: any;
+  toolbarItems?: ToolbarItem[];
+  files?: any[];
+  url?: string;
+  showCorrectColumn?: boolean;
+  show_description?: boolean;
   onPost?: (data: FormBuilderPostData) => void;
+  saveUrl?: string;
 }
 
-export class ReactFormBuilder extends React.Component<FormBuilderProps> {
+export class ReactFormBuilder extends React.Component<FormBuilderProps> {}
 
+export interface FormGeneratorProps {
+  form_action: string;
+  form_method: string;
+  action_name?: string;
+  onSubmit?: () => void;
+  data: any[];
+  back_action?: string;
+  back_name?: string;
+  task_id?: number;
+  answer_data?: any[];
+  authenticity_token?: string;
+  hide_actions?: boolean;
+  skip_validations?: boolean;
+  display_short?: boolean;
+  read_only?: boolean;
+  // eslint-disable-next-line no-undef
+  variables?: Record<any, any>;
 }
+
+export class ReactFormGenerator extends React.Component<FormGeneratorProps> {}
