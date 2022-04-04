@@ -67,6 +67,7 @@ export type DateElement = {
   readOnly: boolean;
   showTimeSelect: boolean;
   showTimeSelectOnly: boolean;
+  showTimeInput: boolean;
   timeFormat: string;
 } & FormBuilderInput;
 export type RangeElement = {
