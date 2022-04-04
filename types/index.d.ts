@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import * as React from "react";
+import * as React from 'react';
 
 type BaseElement = {
   id: string;
@@ -88,7 +88,6 @@ export type SignatureElement = {
   readOnly: boolean;
 } & FormBuilderInput;
 export type TaskData = BaseElement &
-  // eslint-disable-next-line no-use-before-define
   (| StaticElement
     | FormBuilderInput
     | SelectableElement
@@ -98,6 +97,7 @@ export type TaskData = BaseElement &
     | WebsiteElement
     | FileElement
     | SignatureElement
+    // eslint-disable-next-line no-use-before-define
     | FormBuilderLayout
   );
 export type FormBuilderLayout = {
