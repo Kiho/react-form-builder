@@ -567,6 +567,7 @@ class Camera extends React.Component {
   };
 
   render() {
+    const imageStyle = { objectFit: 'contain', objectPosition: (this.props.data.center) ? 'center' : 'left' };
     let baseClasses = 'SortableItem rfb-item';
     const name = this.props.data.field_name;
     const fileInputStyle = this.state.img ? { display: 'none' } : null;
@@ -590,7 +591,7 @@ class Camera extends React.Component {
           this.props.defaultValue.length > 0 ? (
             <div>
               <img
-                style={{ objectFit: 'contain' }}
+                style={imageStyle}
                 src={sourceDataURL}
                 width={
                   this.props.data.width < window.innerWidth
