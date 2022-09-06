@@ -34,6 +34,7 @@ type BaseElement = {
   canHaveOptionValue: boolean;
   canHavePageBreakBefore: boolean;
   canPopulateFromApi: boolean;
+  isUneditable?: boolean;
   text: string;
 };
 export type StaticElement = {
