@@ -1,6 +1,7 @@
 import React from 'react';
 import store from './src/stores/store';
 import { ReactFormGenerator } from './src/index';
+import { EventEmitter } from 'fbemitter';
 
 const answers = {};
 // const answers = {
@@ -29,6 +30,11 @@ export default class Demobar extends React.Component {
     this._onSubmit = this._onSubmit.bind(this);
 
     store.subscribe(state => update(state.data));
+    this.eventEmitter = new EventEmitter();
+  }
+
+  submitTrigger() {
+    this.eventEmitter.emit('formSubmit');
   }
 
   showPreview() {
@@ -68,7 +74,7 @@ export default class Demobar extends React.Component {
 
   // eslint-disable-next-line no-unused-vars
   _onSubmit(data) {
-    // console.log('onSubmit', data);
+    console.log('onSubmit', data);
     // Place code to post json data to server here
   }
 
@@ -100,7 +106,7 @@ export default class Demobar extends React.Component {
         <button className="btn btn-default float-right" style={{ marginRight: '10px' }} onClick={() => this.showRoPreview()}>Read Only Form</button>
         <button className="btn btn-default float-right" style={{ marginRight: '10px' }} onClick={() => this.saveFormData()}>Save Form</button>
 
-        { this.state.previewVisible &&
+        {this.state.previewVisible &&
           <div className={modalClass} role="dialog">
             <div className="modal-dialog modal-lg" role="document">
               <div className="modal-content">
@@ -113,20 +119,22 @@ export default class Demobar extends React.Component {
                   form_action="/api/form"
                   form_method="POST"
                   // skip_validations={true}
-                  // onSubmit={this._onSubmit}
+                  onSubmit={this._onSubmit}
                   variables={this.props.variables}
                   data={this.state.data}
-                  locale='en'/>
+                  eventEmitter={this.eventEmitter}
+                  locale='en' />
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                  <button type="button" className="btn btn-default float-right" style={{ marginRight: '10px' }} onClick={() => this.submitTrigger()}>Submit Trigger</button>
+                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close1</button>
                 </div>
               </div>
             </div>
           </div>
         }
 
-        { this.state.roPreviewVisible &&
+        {this.state.roPreviewVisible &&
           <div className={roModalClass}>
             <div className="modal-dialog modal-lg">
               <div className="modal-content">
@@ -142,17 +150,17 @@ export default class Demobar extends React.Component {
                   variables={this.props.variables}
                   hide_actions={true}
                   data={this.state.data}
-                  locale='en'/>
+                  locale='en' />
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close2</button>
                 </div>
               </div>
             </div>
           </div>
         }
 
-        { this.state.shortPreviewVisible &&
+        {this.state.shortPreviewVisible &&
           <div className={shortModalClass}>
             <div className="modal-dialog modal-lg">
               <div className="modal-content border border-light p-3 mb-4">
@@ -167,10 +175,10 @@ export default class Demobar extends React.Component {
                   variables={this.props.variables}
                   hide_actions={false}
                   locale='en'
-                  />
+                />
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close3</button>
                 </div>
               </div>
             </div>

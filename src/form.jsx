@@ -26,8 +26,18 @@ class ReactForm extends React.Component {
   constructor(props) {
     super(props);
     this.answerData = this._convert(props.answer_data);
-    this.emitter = new EventEmitter();
+    this.emitter = props.eventEmitter || new EventEmitter();
     this.getDataById = this.getDataById.bind(this);
+  }
+
+  componentDidMount() {
+    this.subscription = this.emitter.addListener('formSubmit', () => {
+      this.handleSubmit();
+    });
+  }
+
+  componentWillUnmount() {
+    this.subscription.remove();
   }
 
   _convert(answers) {
@@ -193,7 +203,7 @@ class ReactForm extends React.Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    e?.preventDefault();
 
     let errors = [];
     if (!this.props.skip_validations) {
