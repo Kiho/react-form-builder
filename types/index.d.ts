@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import * as React from 'react';
+import { EventEmitter } from 'fbemitter';
 
 type BaseElement = {
   id: string;
@@ -157,6 +158,7 @@ export interface FormGeneratorProps {
   read_only?: boolean;
   // eslint-disable-next-line no-undef
   variables?: Record<any, any>;
+  eventEmitter?: EventEmitter;
 }
 
 export class ReactFormGenerator extends React.Component<FormGeneratorProps> {}
