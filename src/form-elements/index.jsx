@@ -173,9 +173,9 @@ class PhoneNumber extends React.Component {
     let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) { baseClasses += ' alwaysbreak'; }
 
-    // if (this.props.read_only) {
-    //   props.disabled = 'disabled';
-    // }
+    if (this.props.read_only) {
+      props.disabled = 'disabled';
+    }
 
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
@@ -183,12 +183,11 @@ class PhoneNumber extends React.Component {
         <div className="form-group">
           <ComponentLabel {...this.props} />
           <InputMask
-            disabled={this.props.read_only}
             mask={'(99) 999 99 99'}
             maskPlaceholder={null}
-          >
-            {(inputProps) => <input {...inputProps} {...props} />}
-          </InputMask>
+            inputRef={this.inputField}
+            {...props}
+          />
         </div>
       </div>
     );
