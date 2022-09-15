@@ -184,7 +184,6 @@ class PhoneNumber extends React.Component {
           <ComponentLabel {...this.props} />
           <InputMask
             mask={'(99) 999 99 99'}
-            maskPlaceholder={null}
             inputRef={this.inputField}
             {...props}
           />
