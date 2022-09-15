@@ -264,7 +264,7 @@ class ReactForm extends React.Component {
         if (phoneValue) {
           const validatePhone = (phone) => phone.match(
             // eslint-disable-next-line no-useless-escape
-            /^[+]?(1\-|1\s|1|\d{3}\-|\d{3}\s|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/g
+            /^\(\d{2}\) \d{3} \d{2} \d{2}$/g
           );
           const checkPhone = validatePhone(phoneValue);
           if (!checkPhone) {
