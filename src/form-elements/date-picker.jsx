@@ -120,17 +120,7 @@ class DatePicker extends React.Component {
                      value={this.state.value}
                      className="form-control" />
             }
-            { iOS && !readOnly &&
-              <input type="date"
-                     name={props.name}
-                     ref={props.ref}
-                     onChange={this.handleChange}
-                     dateFormat="MM/DD/YYYY"
-                     placeholder={this.state.placeholder}
-                     value={this.state.value}
-                     className = "form-control" />
-            }
-            { !iOS && !readOnly &&
+            { !readOnly &&
               <ReactDatePicker
                 name={props.name}
                 ref={props.ref}
