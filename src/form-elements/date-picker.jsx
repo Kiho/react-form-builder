@@ -112,40 +112,15 @@ class DatePicker extends React.Component {
           <ComponentLabel {...this.props} />
           <div>
             { readOnly &&
-              <ReactDatePicker
-                name={props.name}
-                ref={props.ref}
-                onChange={this.handleChange}
-                selected={this.state.internalValue}
-                todayButton={'Today'}
-                className = "form-control"
-                isClearable={true}
-                showTimeSelect={showTimeSelect}
-                showTimeSelectOnly={showTimeSelectOnly}
-                showTimeInput={showTimeInput}
-                dateFormat={this.state.formatMask}
-                portalId="root-portal"
-                autoComplete="off"
-                placeholderText={placeholderText} />
+              <input type="text"
+                     name={props.name}
+                     ref={props.ref}
+                     readOnly={readOnly}
+                     placeholder={this.state.placeholder}
+                     value={this.state.value}
+                     className="form-control" />
             }
-            { iOS && !readOnly &&
-              <ReactDatePicker
-                name={props.name}
-                ref={props.ref}
-                onChange={this.handleChange}
-                selected={this.state.internalValue}
-                todayButton={'Today'}
-                className = "form-control"
-                isClearable={true}
-                showTimeSelect={showTimeSelect}
-                showTimeSelectOnly={showTimeSelectOnly}
-                showTimeInput={showTimeInput}
-                dateFormat={this.state.formatMask}
-                portalId="root-portal"
-                autoComplete="off"
-                placeholderText={placeholderText} />
-            }
-            { !iOS && !readOnly &&
+            { !readOnly &&
               <ReactDatePicker
                 name={props.name}
                 ref={props.ref}
