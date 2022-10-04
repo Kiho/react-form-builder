@@ -5,9 +5,9 @@
     border: 1px solid #ddd;
     background: #fafafa;
     padding: 10px;
-    box-shadow: 0 0 2px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
     min-height: 750px;
-    width:100%;
+    width: 100%;
 
     .preview-page-break {
       padding: 5px 0;
@@ -18,13 +18,11 @@
       width: 100%;
       font-weight: bold;
       margin: 5px 0;
-      background: repeating-linear-gradient(
-        45deg,
-        #fff,
-        #fff 10px,
-        #eee 10px,
-        #eee 20px
-      );
+      background: repeating-linear-gradient(45deg,
+          #fff,
+          #fff 10px,
+          #eee 10px,
+          #eee 20px);
     }
 
     label {
@@ -34,6 +32,7 @@
     .bold {
       font-weight: bold;
     }
+
     .italic {
       font-style: italic;
     }
@@ -51,6 +50,7 @@
       display: inline-block !important;
       margin-right: 10px !important;
     }
+
     .form-label {
       display: block !important;
     }
@@ -69,30 +69,37 @@
       transition: .5s;
       overflow-y: auto;
 
-      h4, .dismiss-edit {
+      h4,
+      .dismiss-edit {
         margin-bottom: 30px;
       }
+
       .dismiss-edit {
         cursor: pointer;
         margin-top: 10px;
         font-size: 125%;
       }
+
       textarea {
         width: 100%;
       }
+
       .form-group {
         .form-group-range {
           label {
             display: block;
           }
+
           input {
             display: inline-block;
             width: 21%;
             margin-left: 0;
+
             &:last-of-type {
               width: 78%;
               margin-left: 1%;
             }
+
             &:first-of-type {
               width: 21%;
               margin-left: 0;
@@ -100,30 +107,38 @@
           }
         }
       }
+
       .dynamic-option-list {
         margin-bottom: 15px;
+
         ul {
           list-style-type: none;
           margin: 0;
           padding: 0;
+
           li {
             margin-top: 10px;
+
             input {
               &.form-control {
                 width: 84.26%;
                 float: left;
+
                 &[type="checkbox"] {
                   border: none;
                   box-shadow: none;
                   margin-top: 0;
                 }
               }
+
               margin-right: 10px;
             }
+
             button {
               float: left;
               margin-right: 5px;
             }
+
             .dynamic-options-actions-buttons {
               margin-left: 20px;
             }
@@ -131,6 +146,7 @@
         }
       }
     }
+
     .Sortable {
       transition: opacity .25s ease-in;
       position: relative;
@@ -141,29 +157,42 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+
       .rfb-item {
         padding: 10px 20px;
+
         &.SortableItem {
           position: relative;
+
           .form-group {
             pointer-events: none;
-            label, select, input, a {
+
+            label,
+            select,
+            input,
+            a {
               cursor: move;
             }
+
             input[type='date'] {
               height: 42px;
             }
+
             .react-star-rating {
               display: block;
             }
-            .checkbox-label, .radio-label {
+
+            .checkbox-label,
+            .radio-label {
               font-weight: normal;
               display: block;
             }
+
             .label-required {
               margin-left: 5px;
             }
           }
+
           &.is-dragging {
             position: absolute;
             z-index: 1688;
@@ -173,40 +202,50 @@
             padding: 10px 20px;
           }
         }
+
         &.is-placeholder {
           display: block;
           z-index: auto;
           opacity: .4;
           border: 2px #ccc dashed;
         }
+
         .toolbar-header {
           opacity: 0; // visible
           z-index: 100;
           position: relative;
+
           .label {
             position: absolute;
             left: 20px;
           }
+
           .toolbar-header-buttons {
             position: absolute;
             right: 20px;
-            margin-top:-20px;
+            margin-top: -20px;
           }
         }
+
         &:hover {
           box-shadow: inset 0 0 5px #ddd;
           background: #fff;
-          select, input {
+
+          select,
+          input {
             cursor: move;
             pointer-events: none;
           }
+
           .toolbar-header {
             opacity: 1;
           }
         }
       }
     }
+
     &.is-editing {
+
       // .Sortable {
       //   opacity: .5;
       //   transition: opacity .25s ease-in;
@@ -214,7 +253,7 @@
       .edit-form {
         z-index: 2000;
         border-right: 1px solid #ddd;
-        box-shadow: 0 0 2px 1px rgba(0,0,0,0.1);
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
         // width: 80%;
         left: 0;
         transition: .5s;
@@ -231,18 +270,22 @@
       margin-top: 0;
       text-align: center;
     }
+
     .form-group {
       padding: 10px;
       border: 1px dashed #ddd;
     }
+
     ul {
       padding: 0;
+
       li {
         cursor: pointer;
         list-style: none;
         margin: 5px;
         padding: 10px;
         border: 1px dashed #ddd;
+
         i {
           margin: 0 15px 0 10px;
         }
@@ -253,6 +296,7 @@
 
 .image-upload-container {
   position: relative;
+
   .image-upload {
     position: relative;
     opacity: 0;
@@ -270,12 +314,12 @@
 
 .image-upload-preview {
   border: 4px solid #fff;
-  box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .file-upload-preview {
   border: 4px solid #fff;
-  box-shadow: 0 0 2px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
   padding: 5px;
 }
 
@@ -289,7 +333,7 @@
   padding: 10px;
 }
 
-@media ( max-width: $screen-sm-min ) {
+@media (max-width: $screen-sm-min ) {
   .react-form-builder {
     position: relative;
 
@@ -309,8 +353,13 @@
         }
       }
 
+      .Sortable .rfb-item .toolbar-header {
+        opacity: 1;
+      }
+
       .Sortable .rfb-item .toolbar-header .toolbar-header-buttons {
         right: -15px;
+
         .btn {
           margin-right: 5px;
           border-radius: 50%;
@@ -337,8 +386,8 @@
       -webkit-transition: transform 0.5s;
       transition: transform 0.5s;
 
-      -webkit-transform: translate(0,0);
-      transform: translate(0,0);
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
 
       right: 0;
       border-top: 2px solid #ccc;
@@ -350,8 +399,8 @@
     }
 
     .active-toolbar {
-      -webkit-transform: translate(0,-300px);
-      transform: translate(0,-300px);
+      -webkit-transform: translate(0, -300px);
+      transform: translate(0, -300px);
     }
   }
 
@@ -372,15 +421,18 @@
   display: block;
   width: 100%;
   padding: 0 4px;
+
   label {
     text-align: center;
     display: inline-block;
     padding: 0;
     margin: 0;
     font-weight: normal;
+
     &:first-of-type {
       text-align: left;
     }
+
     &:last-of-type {
       text-align: right;
     }
@@ -417,14 +469,15 @@
 }
 
 .form-place-holder {
-  margin:10px; 
-  border:2px dashed #bbb;
-  -moz-border-radius:5px;
-  -webkit-border-radius:5px;
-  border-radius:5px;
-  padding:25px;
-  text-align:center;
-  font:20pt bold,"Vollkorn";color:#bbb
+  margin: 10px;
+  border: 2px dashed #bbb;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 25px;
+  text-align: center;
+  font: 20pt bold, "Vollkorn";
+  color: #bbb
 }
 
 .form-place-holder-hidden {
