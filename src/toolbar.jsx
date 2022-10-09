@@ -195,11 +195,36 @@ class Toolbar extends React.Component {
       },
       {
         key: 'FourColumnRow',
+        element: 'MultiColumnRow',
         canHaveAnswer: false,
         name: intl.formatMessage({ id: 'four-columns-row' }),
         label: '',
         icon: 'fas fa-columns',
         field_name: 'four_col_row_',
+        col_count: 4,
+        class_name: 'col-md-3',
+      },
+      {
+        key: 'FiveColumnRow',
+        element: 'MultiColumnRow',
+        canHaveAnswer: false,
+        name: intl.formatMessage({ id: 'five-columns-row' }),
+        label: '',
+        icon: 'fas fa-columns',
+        field_name: 'five_col_row_',
+        col_count: 5,
+        class_name: 'col-md-2',
+      },
+      {
+        key: 'SixColumnRow',
+        element: 'MultiColumnRow',
+        canHaveAnswer: false,
+        name: intl.formatMessage({ id: 'six-columns-row' }),
+        label: '',
+        icon: 'fas fa-columns',
+        field_name: 'six_col_row_',
+        col_count: 6,
+        class_name: 'col-md-2',
       },
       {
         key: 'Image',
@@ -366,6 +391,10 @@ class Toolbar extends React.Component {
       elementOptions.max_value = item.max_value;
       elementOptions.min_label = item.min_label;
       elementOptions.max_label = item.max_label;
+    }
+
+    if (item.element === 'MultiColumnRow') {
+      elementOptions.col_count = item.col_count;
     }
 
     if (item.defaultValue) { elementOptions.defaultValue = item.defaultValue; }
