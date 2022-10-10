@@ -53,6 +53,16 @@ const items = [{
     element: 'MultiColumnRow',
   },
   {
+    group_name: 'Multi Column Row',
+    key: 'FiveColumnRow',
+    element: 'MultiColumnRow',
+  },  
+  {
+    group_name: 'Multi Column Row',
+    key: 'SixColumnRow',
+    element: 'MultiColumnRow',
+  },
+  {
     group_name: 'Custom Element',
     key: 'TestComponent',
     element: 'CustomElement',

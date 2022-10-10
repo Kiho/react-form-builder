@@ -11,20 +11,24 @@ import ID from './UUID';
 import store from './stores/store';
 import { groupBy } from './functions';
 
-function isDefaultItem(item) {
-  const keys = Object.keys(item);
-  return keys.filter(x => x !== 'element' && x !== 'key' && x !== 'group_name').length === 0;
-}
+// function isDefaultItem(item) {
+//   const keys = Object.keys(item);
+//   return keys.filter(x => x !== 'element' && x !== 'key' && x !== 'group_name').length === 0;
+// }
 
 function buildItems(items, defaultItems) {
   if (!items) {
     return defaultItems;
   }
   return items.map(x => {
-    let found;
-    if (isDefaultItem(x)) {
+    let found = defaultItems.find(y => (x.element === y.element && y.key === x.key))
+    if (!found) {
       found = defaultItems.find(y => (x.element || x.key) === (y.element || y.key));
-      if (x.group_name) {
+    }
+    if (found) {
+      if (x.inherited !== false) {
+        found = { ...found, ...x };
+      } else if (x.group_name) {
         found.group_name = x.group_name;
       }
     }
@@ -228,7 +232,7 @@ class Toolbar extends React.Component {
         icon: 'fas fa-columns',
         field_name: 'five_col_row_',
         col_count: 5,
-        class_name: 'col-md-2',
+        class_name: 'col',
       },
       {
         key: 'SixColumnRow',
@@ -368,6 +372,8 @@ class Toolbar extends React.Component {
     if (item.content) { elementOptions.content = item.content; }
 
     if (item.href) { elementOptions.href = item.href; }
+
+    if (item.inherited !== undefined) { elementOptions.inherited = item.inherited; }
 
     elementOptions.canHavePageBreakBefore = item.canHavePageBreakBefore !== false;
     elementOptions.canHaveAlternateForm = item.canHaveAlternateForm !== false;

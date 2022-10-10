@@ -22,9 +22,7 @@ function ToolbarGroupItem(props) {
         </button>
         <div className={classShow}>
           <ul>
-            { group.map(x => {
-              return renderItem(x);
-            })}
+            { group.map(renderItem) }
           </ul>
         </div>
       </div>
