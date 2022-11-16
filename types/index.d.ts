@@ -30,6 +30,7 @@ type BaseElement = {
   showDescription?: boolean;
   required: boolean;
   canHaveAlternateForm: boolean;
+  canHaveDlxFieldId: boolean;
   canHaveDisplayHorizontal: boolean;
   canHaveOptionCorrect: boolean;
   canHaveOptionValue: boolean;
