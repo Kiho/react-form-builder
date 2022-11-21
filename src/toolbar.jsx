@@ -330,7 +330,7 @@ class Toolbar extends React.Component {
 
     elementOptions.canHavePageBreakBefore = item.canHavePageBreakBefore !== false;
     elementOptions.canHaveAlternateForm = item.canHaveAlternateForm !== false;
-    elementOptions.canHaveDlxFieldId = item.canHaveDlxFieldId !== false;
+    elementOptions.canHaveDoclogixCoreAttributeShortName = item.canHaveDoclogixCoreAttributeShortName !== false;
     elementOptions.canHaveDisplayHorizontal = item.canHaveDisplayHorizontal !== false;
     if (elementOptions.canHaveDisplayHorizontal) {
       elementOptions.inline = item.inline;

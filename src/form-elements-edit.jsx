@@ -119,7 +119,7 @@ export default class FormElementsEdit extends React.Component {
     const this_checked_alternate_form = this.props.element.hasOwnProperty('alternateForm') ? this.props.element.alternateForm : false;
 
     const {
-      canHavePageBreakBefore, canHaveAlternateForm, canHaveDisplayHorizontal, canHaveOptionCorrect, canHaveOptionValue, canHaveDlxFieldId
+      canHavePageBreakBefore, canHaveAlternateForm, canHaveDisplayHorizontal, canHaveOptionCorrect, canHaveOptionValue, canHaveDoclogixCoreAttributeShortName
     } = this.props.element;
     const canHaveImageSize = (this.state.element.element === 'Image' || this.state.element.element === 'Camera');
 
@@ -345,11 +345,11 @@ export default class FormElementsEdit extends React.Component {
           </div>
         }
 
-        {canHaveDlxFieldId &&
+        {canHaveDoclogixCoreAttributeShortName &&
           <div className="form-group">
             <div className="form-group-range">
               <label className="control-label" htmlFor="rangeMin"><IntlMessages id="DLX Field Id" /></label>
-              <input id="dlxFieldId" type="text" className="form-control" defaultValue={this.props.element.dlxFieldId} onBlur={this.updateElement.bind(this)} onChange={this.editElementProp.bind(this, 'dlxFieldId', 'value')} />
+              <input id="doclogixCoreAttributeShortName" type="text" className="form-control" defaultValue={this.props.element.doclogixCoreAttributeShortName} onBlur={this.updateElement.bind(this)} onChange={this.editElementProp.bind(this, 'doclogixCoreAttributeShortName', 'value')} />
             </div>
           </div>
         }
