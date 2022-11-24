@@ -183,7 +183,7 @@ class PhoneNumber extends React.Component {
         <div className="form-group">
           <ComponentLabel {...this.props} />
           <InputMask
-            mask={'(99) 999 99 99'}
+            mask={'+999 999 99999'}
             inputRef={this.inputField}
             {...props}
           />
