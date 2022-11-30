@@ -123,6 +123,8 @@ export default class FormElementsEdit extends React.Component {
     } = this.props.element;
     const canHaveImageSize = (this.state.element.element === 'Image' || this.state.element.element === 'Camera');
 
+    const canHaveSpecialFields = !this.props.unprivilegedMode;
+
     const this_files = this.props.files.length ? this.props.files : [];
     if (this_files.length < 1 || (this_files.length > 0 && this_files[0].id !== '')) {
       this_files.unshift({ id: '', file_name: '' });
@@ -321,37 +323,41 @@ export default class FormElementsEdit extends React.Component {
           : (<div />)
         }
 
-        {canHavePageBreakBefore &&
-          <div className="form-group">
-            <label className="control-label"><IntlMessages id="print-options" /></label>
-            <div className="custom-control custom-checkbox">
-              <input id="page-break-before-element" className="custom-control-input" type="checkbox" checked={this_checked_page_break} value={true} onChange={this.editElementProp.bind(this, 'pageBreakBefore', 'checked')} />
-              <label className="custom-control-label" htmlFor="page-break-before-element">
-                <IntlMessages id="page-break-before-elements" />?
-              </label>
-            </div>
-          </div>
-        }
+        {canHaveSpecialFields &&
+          <>
+            {canHavePageBreakBefore &&
+              <div className="form-group">
+                <label className="control-label"><IntlMessages id="print-options" /></label>
+                <div className="custom-control custom-checkbox">
+                  <input id="page-break-before-element" className="custom-control-input" type="checkbox" checked={this_checked_page_break} value={true} onChange={this.editElementProp.bind(this, 'pageBreakBefore', 'checked')} />
+                  <label className="custom-control-label" htmlFor="page-break-before-element">
+                    <IntlMessages id="page-break-before-elements" />?
+                  </label>
+                </div>
+              </div>
+            }
 
-        {canHaveAlternateForm &&
-          <div className="form-group">
-            <label className="control-label"><IntlMessages id="alternate-signature-page" /></label>
-            <div className="custom-control custom-checkbox">
-              <input id="display-on-alternate" className="custom-control-input" type="checkbox" checked={this_checked_alternate_form} value={true} onChange={this.editElementProp.bind(this, 'alternateForm', 'checked')} />
-              <label className="custom-control-label" htmlFor="display-on-alternate">
-                <IntlMessages id="display-on-alternate-signature-page" />?
-              </label>
-            </div>
-          </div>
-        }
+            {canHaveAlternateForm &&
+              <div className="form-group">
+                <label className="control-label"><IntlMessages id="alternate-signature-page" /></label>
+                <div className="custom-control custom-checkbox">
+                  <input id="display-on-alternate" className="custom-control-input" type="checkbox" checked={this_checked_alternate_form} value={true} onChange={this.editElementProp.bind(this, 'alternateForm', 'checked')} />
+                  <label className="custom-control-label" htmlFor="display-on-alternate">
+                    <IntlMessages id="display-on-alternate-signature-page" />?
+                  </label>
+                </div>
+              </div>
+            }
 
-        {canHaveDoclogixCoreAttributeShortName &&
-          <div className="form-group">
-            <div className="form-group-range">
-              <label className="control-label" htmlFor="rangeMin"><IntlMessages id="DLX Field Id" /></label>
-              <input id="doclogixCoreAttributeShortName" type="text" className="form-control" defaultValue={this.props.element.doclogixCoreAttributeShortName} onBlur={this.updateElement.bind(this)} onChange={this.editElementProp.bind(this, 'doclogixCoreAttributeShortName', 'value')} />
-            </div>
-          </div>
+            {canHaveDoclogixCoreAttributeShortName &&
+              <div className="form-group">
+                <div className="form-group-range">
+                  <label className="control-label" htmlFor="rangeMin"><IntlMessages id="DLX Field Id" /></label>
+                  <input id="doclogixCoreAttributeShortName" type="text" className="form-control" defaultValue={this.props.element.doclogixCoreAttributeShortName} onBlur={this.updateElement.bind(this)} onChange={this.editElementProp.bind(this, 'doclogixCoreAttributeShortName', 'value')} />
+                </div>
+              </div>
+            }
+          </>
         }
 
         {this.props.element.hasOwnProperty('step') &&
