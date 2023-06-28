@@ -221,18 +221,22 @@ class ReactForm extends React.Component {
     }
   }
 
-  handleBlur(event) {
+   handleBlur(event) {
     // Call submit function on blur
-     const { onBlur } = this.props;
-        const data = this._collectFormData(this.props.data);
-        onBlur(data);
+    if (this.props.onBlur) {
+      const {onBlur} = this.props;
+      const data = this._collectFormData(this.props.data);
+      onBlur(data);
+    }
   }
 
   handleChange(event) {
     // Call submit function on change
-      const { onChange } = this.props;
-        const data = this._collectFormData(this.props.data);
-        onChange(data);
+    if (this.props.onChange) {
+      const {onChange} = this.props;
+      const data = this._collectFormData(this.props.data);
+      onChange(data);
+    }
   }
 
   validateForm() {
