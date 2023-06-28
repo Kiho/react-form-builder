@@ -135,7 +135,7 @@ export interface FormBuilderProps {
 export class ReactFormBuilder extends React.Component<FormBuilderProps> {}
 
 export interface FormGeneratorOnSubmitParams {
-  object: string
+  id: number;
   name: string;
   custom_name: string;
   value: string | string[];
