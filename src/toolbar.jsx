@@ -229,7 +229,7 @@ class Toolbar extends React.Component {
         icon: 'fas fa-columns',
         field_name: 'four_col_row_',
         col_count: 4,
-        class_name: 'col-md-3',
+        class_name: 'col-md-4',
       },
       {
         key: 'FiveColumnRow',
@@ -366,7 +366,7 @@ class Toolbar extends React.Component {
     if (this.props.showDescription === true && !item.static) {
       elementOptions.showDescription = true;
     }
-    
+
     if (item.static) {
       elementOptions.bold = false;
       elementOptions.italic = false;
@@ -455,7 +455,7 @@ class Toolbar extends React.Component {
   render() {
     const { items, grouped, groupKeys } = buildGroupItems(this.state.items);
     return (
-      <div className="col-md-3 react-form-builder-toolbar float-right">
+      <div className="col-md-4 react-form-builder-toolbar float-right">
         <h4>{this.props.intl.formatMessage({ id: 'toolbox' })}</h4>
         <ul>
           {

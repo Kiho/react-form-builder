@@ -29,6 +29,10 @@ class ReactForm extends React.Component {
     this.answerData = this._convert(props.answer_data);
     this.emitter = new EventEmitter();
     this.getDataById = this.getDataById.bind(this);
+
+    // Bind handleBlur and handleChange methods
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   _convert(answers) {
@@ -214,6 +218,18 @@ class ReactForm extends React.Component {
         $form.submit();
       }
     }
+  }
+
+  handleBlur(event) {
+    // Call submit function on blur
+    this.handleSubmitForm();
+  }
+
+  handleChange(event) {
+    // Call submit function on change
+      const { onChange } = this.props;
+        const data = this._collectFormData(this.props.data);
+        onChange(data);
   }
 
   validateForm() {
@@ -415,7 +431,7 @@ class ReactForm extends React.Component {
       <div>
           <FormValidator emitter={this.emitter} />
           <div className='react-form-builder-form'>
-            <form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
+            <form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onBlur={this.handleBlur.bind(this)} onChange={this.handleChange.bind(this)} onSubmit={this.handleSubmit.bind(this)} method={this.props.form_method}>
               {this.props.authenticity_token &&
                 <div style={formTokenStyle}>
                   <input name='utf8' type='hidden' value='&#x2713;' />
