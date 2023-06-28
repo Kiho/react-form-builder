@@ -145,6 +145,7 @@ export interface FormGeneratorProps {
   form_action: string;
   form_method: string;
   action_name?: string;
+  onBlur?: (info: FormGeneratorOnSubmitParams[]) => void;
   onSubmit?: (info: FormGeneratorOnSubmitParams[]) => void;
   onChange?: (info: FormGeneratorOnSubmitParams[]) => void;
   data: any[];

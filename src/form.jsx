@@ -150,6 +150,7 @@ class ReactForm extends React.Component {
 
   _collect(item) {
     const itemData = {
+      id: item.id,
       name: item.field_name,
       custom_name: item.custom_name || item.field_name,
     };
@@ -222,7 +223,9 @@ class ReactForm extends React.Component {
 
   handleBlur(event) {
     // Call submit function on blur
-    this.handleSubmitForm();
+     const { onBlur } = this.props;
+        const data = this._collectFormData(this.props.data);
+        onBlur(data);
   }
 
   handleChange(event) {
