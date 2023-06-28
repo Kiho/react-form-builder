@@ -229,7 +229,7 @@ class Toolbar extends React.Component {
         icon: 'fas fa-columns',
         field_name: 'four_col_row_',
         col_count: 4,
-        class_name: 'col-md-4',
+        class_name: 'col-md-3',
       },
       {
         key: 'FiveColumnRow',
