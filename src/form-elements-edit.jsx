@@ -12,7 +12,7 @@ import ID from './UUID';
 import IntlMessages from './language-provider/IntlMessages';
 
 const toolbar = {
-  options: ['inline', 'list', 'textAlign', 'fontSize', 'link', 'history'],
+  options: ['inline', 'blockType', 'fontSize', 'fontFamily', 'list', 'textAlign', 'colorPicker', 'link', 'embedded', 'image', 'remove', 'history'],
   inline: {
     inDropdown: false,
     className: undefined,
